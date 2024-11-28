@@ -1,5 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct {
-    int Id;
-    char Nome[30];
+    int IdP;
+    char NomeP[50];
+    char Tamanho;
     float Preço;
-} Ingredientes;
+} Pizza;
