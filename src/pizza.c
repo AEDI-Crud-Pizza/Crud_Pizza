@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include "pizza.h"
+
+
 void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     Pizza novaPizza;
     printf("Digite o nome da pizza: ");
