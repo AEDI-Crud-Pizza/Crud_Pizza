@@ -1,4 +1,6 @@
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "ingrediente.h"
 
 typedef struct {
     int id;
