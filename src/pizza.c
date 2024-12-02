@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "pizza.h"
 
 
@@ -55,4 +56,33 @@ void removerPizza(Pizza* pizzas, int* numPizzas) {
         }
     }
     printf("Pizza não encontrada!\n");
+}
+
+void venderPizza(int numPizzas, char* tamanho, char ingredientes[][20], int numIngredientes) {
+    float precoP= 39.90;
+    float precoM= 59.90;
+    float precoG= 79.90;
+
+printf("Digite a quantidade de pizzas que quer comprar: ");
+scanf("%d", &numPizzas);
+
+printf("Digite o tamanho da pizza");
+scanf("%s", &tamanho);
+
+printf("Digite a quantidade de ingredientes a adicionar: ");
+scanf("%d", &numIngredientes);
+
+printf("Digite os ingredientes que quer adicionar: ");
+
+}
+
+void visualizarIngrediente(Ingrediente* ingredientes, int numIngredientes) {
+    printf("Lista de Ingredientes Cadastrados:\n");
+    
+    for (int i = 0; i < numIngredientes; i++) {
+        printf("ID: %d\n", ingredientes[i].id);
+        printf("Nome: %s\n", ingredientes[i].nome);
+        printf("Preço: R$ %.2f\n", ingredientes[i].preco);
+        printf("\n");
+    }
 }
