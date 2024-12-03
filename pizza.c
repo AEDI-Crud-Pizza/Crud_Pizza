@@ -30,7 +30,7 @@ void editarPizza(Pizza* pizzas, int numPizzas) {
         if (pizzas[i].id == id) {
             printf("Digite o novo nome: ");
             scanf("%s", pizzas[i].nome);
-            printf("Digite o novo preço: ");
+            printf("Digite o novo preco: ");
             scanf("%f", &pizzas[i].preco);
             return;
         }
