@@ -5,6 +5,8 @@
 
 void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     Pizza novaPizza;
+    printf("Digite o ID da pizza: ");
+    scanf("%d", &novaPizza.id);
     printf("Digite o nome da pizza: ");
     scanf("%s", novaPizza.nome);
     printf("Digite o preco da pizza: ");
