@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "pizza.h"
 
@@ -6,7 +7,7 @@
 void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     Pizza novaPizza;
     printf("Digite o nome da pizza: ");
-    scanf("%s", novaPizza.nome);
+    scanf("%s", &novaPizza.nome);
     printf("Digite o tamanho (P, M, G): ");
     scanf(" %c", &novaPizza.tamanho);
     printf("Digite o preço base: ");
@@ -14,11 +15,26 @@ void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     novaPizza.id = *numPizzas + 1;  // ID baseado no número de pizzas
     pizzas[*numPizzas] = novaPizza;
     (*numPizzas)++;
+
+    FILE arquivo =fopen("C:\Users\Gustavo Lopes\Desktop\Crud_Pizza\data\cardapio.txt","a");
+    
+    fprintf(arquivo,"%s %c %.2f\n",novaPizza.nome, novaPizza.tamanho, novaPizza.preco);
+
+    fclose(arquivo);
 }
 
 void listarPizzas(Pizza* pizzas, int numPizzas) {
+
+    printf("Lista de Pizzas Cadastradas:\n");
+    if(numPizzas == 0) {
+        printf("Nenhuma pizza cadastrada!\n");
+        return;
+    }
+    
+    FILE arquivo = fopen("C:\Users\Gustavo Lopes\Desktop\Crud_Pizza\data\cardapio.txt","r");
+
     for (int i = 0; i < numPizzas; i++) {
-        printf("ID: %d | Nome: %s | Tamanho: %c | Preço: %.2f\n", pizzas[i].id, pizzas[i].nome, pizzas[i].tamanho, pizzas[i].preco);
+        printf("ID: %d |Nome: %s | Tamanho: %c | Preço: %.2f\n",pizzas[i].id,pizzas[i].nome, pizzas[i].tamanho, pizzas[i].preco);
     }
 }
 
