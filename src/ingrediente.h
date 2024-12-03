@@ -1,5 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef INGREDIENTE_H
+#define INGREDIENTE_H
+
 
 typedef struct {
     int id;
@@ -11,3 +12,5 @@ void adicionarIngrediente(Ingrediente* ingredientes, int* numIngredientes);
 void listarIngredientes(Ingrediente* ingredientes, int numIngredientes);
 void editarIngrediente(Ingrediente* ingredientes, int numIngredientes);
 void removerIngrediente(Ingrediente* ingredientes, int* numIngredientes);
+
+#endif

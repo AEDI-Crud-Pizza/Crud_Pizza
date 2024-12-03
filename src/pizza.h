@@ -1,12 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "ingrediente.h"
 
-typedef struct {
-    int id;
-    char nome[50];
-    float preco;
-} Ingrediente;
+#ifndef PIZZA_H
+#define PIZZA_H
+
+#include "ingrediente.h"
 
 typedef struct {
     int id;
@@ -23,3 +19,5 @@ void editarPizza(Pizza* pizzas, int numPizzas);
 //void adicionarIngrediente(Ingrediente* ingredientes, int* numIngredientes);
 //void venderPizza(int numPizzas, char* tamanho, char ingredientes[][20], int numIngredientes)
 //void visualizarIngrediente(Ingrediente* ingredientes, int numIngredientes);
+
+#endif
