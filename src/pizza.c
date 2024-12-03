@@ -69,7 +69,7 @@ void editarPizza(Pizza* pizzas, int numPizzas) {
 
 void removerPizza(Pizza* pizzas, int* numPizzas) {
     int id;
-    FILE arquivo = fopen("cardapio.txt","r+");
+    FILE* arquivo = fopen("cardapio.txt","r+");
     printf("Digite o ID da pizza que deseja remover: ");
     scanf("%d", &id);
     while(fscanf(arquivo,"%s %c %.2f\n",pizzas[*numPizzas].nome, &pizzas[*numPizzas].tamanho, &pizzas[*numPizzas].preco) != EOF) {
