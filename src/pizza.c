@@ -72,10 +72,10 @@ void removerPizza(Pizza* pizzas, int* numPizzas) {
     FILE arquivo = fopen("cardapio.txt","r+");
     printf("Digite o ID da pizza que deseja remover: ");
     scanf("%d", &id);
-    while(fscanf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, &pizzas[numPizzas].tamanho, &pizzas[numPizzas].preco) != EOF) {
-        if (pizzas[numPizzas].id == id) {
+    while(fscanf(arquivo,"%s %c %.2f\n",pizzas[*numPizzas].nome, &pizzas[*numPizzas].tamanho, &pizzas[*numPizzas].preco) != EOF) {
+        if (pizzas[*numPizzas].id == id) {
             fseek(arquivo, -1, SEEK_CUR);
-            fprintf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, pizzas[numPizzas].tamanho, pizzas[numPizzas].preco);
+            fprintf(arquivo,"%s %c %.2f\n",pizzas[*numPizzas].nome, pizzas[*numPizzas].tamanho, pizzas[*numPizzas].preco);
             fclose(arquivo);
             printf("Pizza removida com sucesso!\n");
             return;
