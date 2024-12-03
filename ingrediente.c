@@ -7,16 +7,16 @@ void adicionarIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
     Ingrediente novoIngrediente;
     printf("Digite o nome do ingrediente: ");
     scanf("%s", novoIngrediente.nome);
-    printf("Digite o preço do ingrediente: ");
+    printf("Digite o preco do ingrediente: ");
     scanf("%f", &novoIngrediente.preco);
-    novoIngrediente.id = *numIngredientes + 1;  // ID baseado no número de ingredientes
+    novoIngrediente.id = *numIngredientes + 1;
     ingredientes[*numIngredientes] = novoIngrediente;
     (*numIngredientes)++;
 }
 
 void listarIngredientes(Ingrediente* ingredientes, int numIngredientes) {
     for (int i = 0; i < numIngredientes; i++) {
-        printf("ID: %d | Nome: %s | Preço: %.2f\n", ingredientes[i].id, ingredientes[i].nome, ingredientes[i].preco);
+        printf("ID: %d | Nome: %s | Preco: %.2f\n", ingredientes[i].id, ingredientes[i].nome, ingredientes[i].preco);
     }
 }
 
@@ -28,12 +28,12 @@ void editarIngrediente(Ingrediente* ingredientes, int numIngredientes) {
         if (ingredientes[i].id == id) {
             printf("Digite o novo nome: ");
             scanf("%s", ingredientes[i].nome);
-            printf("Digite o novo preço: ");
+            printf("Digite o novo preco: ");
             scanf("%f", &ingredientes[i].preco);
             return;
         }
     }
-    printf("Ingrediente não encontrado!\n");
+    printf("Ingrediente nao encontrado!\n");
 }
 
 void removerIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
@@ -42,7 +42,6 @@ void removerIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
     scanf("%d", &id);
     for (int i = 0; i < *numIngredientes; i++) {
         if (ingredientes[i].id == id) {
-            // Desloca os ingredientes para "remover" o ingrediente
             for (int j = i; j < *numIngredientes - 1; j++) {
                 ingredientes[j] = ingredientes[j + 1];
             }
@@ -51,5 +50,5 @@ void removerIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
             return;
         }
     }
-    printf("Ingrediente não encontrado!\n");
+    printf("Ingrediente nao encontrado!\n");
 }

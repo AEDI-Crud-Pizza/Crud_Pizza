@@ -1,7 +1,6 @@
 #ifndef INGREDIENTE_H
 #define INGREDIENTE_H
 
-
 typedef struct {
     int id;
     char nome[50];

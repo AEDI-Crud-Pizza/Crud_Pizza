@@ -6,7 +6,6 @@ int main() {
     Pizza pizzas[100];
     Ingrediente ingredientes[100];
     int numPizzas = 0, numIngredientes = 0;
-
     int opcao = -1;
 
     while (opcao != 9) {
@@ -19,7 +18,7 @@ int main() {
         printf("7. Editar ingrediente\n");
         printf("8. Remover ingrediente\n");
         printf("9. Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -49,11 +48,10 @@ int main() {
                 break;
             case 9:
                 printf("Saindo...\n");
-                opcao = 9;
+                break;
             default:
-                printf("Opção inválida!\n");
+                printf("Opcao invalida!\n");
         }
     }
-
     return 0;
 }

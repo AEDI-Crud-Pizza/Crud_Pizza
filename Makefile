@@ -15,5 +15,4 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	del /f $(OBJ) $(TARGET)
-	
+	del /f $(OBJ) $(TARGET).exe
