@@ -16,7 +16,7 @@ void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     pizzas[*numPizzas] = novaPizza;
     (*numPizzas)++;
 
-    FILE* arquivo = fopen("C:\\Users\\Gustavo Lopes\\Desktop\\Crud_Pizza\\data\\cardapio.txt", "a");
+    FILE* arquivo = fopen("cardapio.txt", "a");
 
     fprintf(arquivo,"%s %c %.2f\n",novaPizza.nome, novaPizza.tamanho, novaPizza.preco);
 
@@ -27,7 +27,7 @@ void listarPizzas(Pizza* pizzas, int numPizzas) {
 
     printf("Lista de Pizzas Cadastradas:\n");
 
-    FILE* arquivo = fopen("C:\\Users\\Gustavo Lopes\\Desktop\\Crud_Pizza\\data\\cardapio.txt", "r");
+    FILE* arquivo = fopen("cardapio.txt", "r");
     if(arquivo == NULL){
         printf("Erro ao abrir o arquivo\n");
         exit(1);
@@ -43,7 +43,7 @@ void listarPizzas(Pizza* pizzas, int numPizzas) {
 
 void editarPizza(Pizza* pizzas, int numPizzas) {
     int id;
-    FILE* arquivo = fopen("C:\\Users\\Gustavo Lopes\\Desktop\\Crud_Pizza\\data\\cardapio.txt", "r+");
+    FILE* arquivo = fopen("cardapio.txt", "r+");
     printf("Digite o ID da pizza que deseja editar: ");
     scanf("%d", &id);
     while (fscanf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, &pizzas[numPizzas].tamanho, &pizzas[numPizzas].preco) != EOF) {
@@ -69,7 +69,7 @@ void editarPizza(Pizza* pizzas, int numPizzas) {
 
 void removerPizza(Pizza* pizzas, int* numPizzas) {
     int id;
-    FILE arquivo = fopen("C:\Users\Gustavo Lopes\Desktop\Crud_Pizza\data\cardapio.txt","r+");
+    FILE arquivo = fopen("cardapio.txt","r+");
     printf("Digite o ID da pizza que deseja remover: ");
     scanf("%d", &id);
     while(fscanf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, &pizzas[numPizzas].tamanho, &pizzas[numPizzas].preco) != EOF) {
