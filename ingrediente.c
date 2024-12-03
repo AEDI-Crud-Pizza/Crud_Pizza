@@ -1,4 +1,7 @@
 #include "ingrediente.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void adicionarIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
     Ingrediente novoIngrediente;
