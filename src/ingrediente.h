@@ -8,3 +8,6 @@ typedef struct {
 } Ingrediente;
 
 void adicionarIngrediente(Ingrediente* ingredientes, int* numIngredientes);
+void listarIngredientes(Ingrediente* ingredientes, int numIngredientes);
+void editarIngrediente(Ingrediente* ingredientes, int numIngredientes);
+void removerIngrediente(Ingrediente* ingredientes, int* numIngredientes);

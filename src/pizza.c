@@ -16,8 +16,8 @@ void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     pizzas[*numPizzas] = novaPizza;
     (*numPizzas)++;
 
-    FILE arquivo =fopen("C:\Users\Gustavo Lopes\Desktop\Crud_Pizza\data\cardapio.txt","a");
-    
+    FILE* arquivo = fopen("C:\\Users\\Gustavo Lopes\\Desktop\\Crud_Pizza\\data\\cardapio.txt", "a");
+
     fprintf(arquivo,"%s %c %.2f\n",novaPizza.nome, novaPizza.tamanho, novaPizza.preco);
 
     fclose(arquivo);
@@ -26,47 +26,57 @@ void adicionarPizza(Pizza* pizzas, int* numPizzas) {
 void listarPizzas(Pizza* pizzas, int numPizzas) {
 
     printf("Lista de Pizzas Cadastradas:\n");
-    if(numPizzas == 0) {
-        printf("Nenhuma pizza cadastrada!\n");
-        return;
-    }
-    
-    FILE arquivo = fopen("C:\Users\Gustavo Lopes\Desktop\Crud_Pizza\data\cardapio.txt","r");
 
-    for (int i = 0; i < numPizzas; i++) {
-        printf("ID: %d |Nome: %s | Tamanho: %c | Preço: %.2f\n",pizzas[i].id,pizzas[i].nome, pizzas[i].tamanho, pizzas[i].preco);
+    FILE* arquivo = fopen("C:\\Users\\Gustavo Lopes\\Desktop\\Crud_Pizza\\data\\cardapio.txt", "r");
+    if(arquivo == NULL){
+        printf("Erro ao abrir o arquivo\n");
+        exit(1);
     }
+
+    while(fscanf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, &pizzas[numPizzas].tamanho, &pizzas[numPizzas].preco) != EOF){
+        numPizzas++;
+        printf("ID: %d |Nome: %s | Tamanho: %c | Preço: %.2f\n",pizzas[numPizzas].id,pizzas[numPizzas].nome, pizzas[numPizzas].tamanho, pizzas[numPizzas].preco);
+    }
+
+    fclose(arquivo);
 }
 
 void editarPizza(Pizza* pizzas, int numPizzas) {
     int id;
+    FILE* arquivo = fopen("C:\\Users\\Gustavo Lopes\\Desktop\\Crud_Pizza\\data\\cardapio.txt", "r+");
     printf("Digite o ID da pizza que deseja editar: ");
     scanf("%d", &id);
-    for (int i = 0; i < numPizzas; i++) {
-        if (pizzas[i].id == id) {
-            printf("Digite o novo nome: ");
-            scanf("%s", pizzas[i].nome);
+    while (fscanf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, &pizzas[numPizzas].tamanho, &pizzas[numPizzas].preco) != EOF) {
+
+        if (pizzas[numPizzas].id == id) {
+            printf("Digite o novo nome da pizza: ");
+            scanf("%s", &pizzas[numPizzas].nome);
             printf("Digite o novo tamanho (P, M, G): ");
-            scanf(" %c", &pizzas[i].tamanho);
-            printf("Digite o novo preço: ");
-            scanf("%f", &pizzas[i].preco);
+            scanf(" %c", &pizzas[numPizzas].tamanho);
+            printf("Digite o novo preço base: ");
+            scanf("%f", &pizzas[numPizzas].preco);
+            fseek(arquivo, -1, SEEK_CUR);
+            fprintf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, pizzas[numPizzas].tamanho, pizzas[numPizzas].preco);
+            fclose(arquivo);
+            printf("Pizza editada com sucesso!\n");
             return;
         }
+
     }
+    fclose(arquivo);
     printf("Pizza não encontrada!\n");
 }
 
 void removerPizza(Pizza* pizzas, int* numPizzas) {
     int id;
+    FILE arquivo = fopen("C:\Users\Gustavo Lopes\Desktop\Crud_Pizza\data\cardapio.txt","r+");
     printf("Digite o ID da pizza que deseja remover: ");
     scanf("%d", &id);
-    for (int i = 0; i < *numPizzas; i++) {
-        if (pizzas[i].id == id) {
-            // Desloca as pizzas para "remover" a pizza
-            for (int j = i; j < *numPizzas - 1; j++) {
-                pizzas[j] = pizzas[j + 1];
-            }
-            (*numPizzas)--;
+    while(fscanf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, &pizzas[numPizzas].tamanho, &pizzas[numPizzas].preco) != EOF) {
+        if (pizzas[numPizzas].id == id) {
+            fseek(arquivo, -1, SEEK_CUR);
+            fprintf(arquivo,"%s %c %.2f\n",pizzas[numPizzas].nome, pizzas[numPizzas].tamanho, pizzas[numPizzas].preco);
+            fclose(arquivo);
             printf("Pizza removida com sucesso!\n");
             return;
         }
@@ -82,13 +92,14 @@ void venderPizza(int numPizzas, char* tamanho, char ingredientes[][20], int numI
 printf("Digite a quantidade de pizzas que quer comprar: ");
 scanf("%d", &numPizzas);
 
-printf("Digite o tamanho da pizza");
+printf("Digite o tamanho da pizza: ");
 scanf("%s", &tamanho);
 
 printf("Digite a quantidade de ingredientes a adicionar: ");
 scanf("%d", &numIngredientes);
 
 printf("Digite os ingredientes que quer adicionar: ");
+
 
 }
 
