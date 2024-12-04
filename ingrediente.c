@@ -9,7 +9,7 @@ void adicionarIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
     scanf("%s", novoIngrediente.nome);
     printf("Digite o preco do ingrediente: ");
     scanf("%f", &novoIngrediente.preco);
-    novoIngrediente.id = *numIngredientes + 1;
+    novoIngrediente.id = *numIngredientes + 1; 
     ingredientes[*numIngredientes] = novoIngrediente;
     (*numIngredientes)++;
 }
