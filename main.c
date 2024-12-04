@@ -17,7 +17,8 @@ int main() {
         printf("6. Listar ingredientes\n");
         printf("7. Editar ingrediente\n");
         printf("8. Remover ingrediente\n");
-        printf("9. Sair\n");
+        printf("9. Vender pizza\n");
+        printf("10. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
@@ -47,11 +48,15 @@ int main() {
                 removerIngrediente(ingredientes, &numIngredientes);
                 break;
             case 9:
+                venderPizza(pizzas, numPizzas, ingredientes, numIngredientes);
+                break;
+            case 10:
                 printf("Saindo...\n");
                 break;
-            default: //Eu não conhecia esse comando, mas ele é uma alternativa muito boa ao usar else if
+            default:
                 printf("Opcao invalida!\n");
         }
     }
+
     return 0;
 }

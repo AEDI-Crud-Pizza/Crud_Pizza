@@ -9,10 +9,10 @@ void adicionarPizza(Pizza* pizzas, int* numPizzas) {
     scanf("%s", novaPizza.nome);
     printf("Digite o preco da pizza: ");
     scanf("%f", &novaPizza.preco);
-    novaPizza.id = *numPizzas + 1; //Adiciona um ID automaticamente a medida que as pizzas são criadas
+    novaPizza.id = *numPizzas + 1;
     novaPizza.nIngredientes = 0;
     pizzas[*numPizzas] = novaPizza;
-    (*numPizzas)++;  //Incrementa o número de pizzas na pizarria
+    (*numPizzas)++;
 }
 
 void listarPizzas(Pizza* pizzas, int numPizzas) {
@@ -53,34 +53,62 @@ void removerPizza(Pizza* pizzas, int* numPizzas) {
     printf("Pizza nao encontrada!\n");
 }
 
-void venderPizza(Pizza *pizzas, int qtdPizzas, Ingrediente *ingredientes, int qtdIngredientes) {
-    int idPizza, idIngrediente, adicionar;
-    float precoFinal = 0;
+void venderPizza(Pizza* pizzas, int qtdPizzas, Ingrediente* ingredientes, int qtdIngredientes) {
+    int idPizza, idIngrediente;
+    float precoFinal;
+    int adicionarIngredientes;
+    Pizza pizzaEscolhida;
+    int i, j;
 
+    printf("Escolha a pizza do cardápio:\n");
     listarPizzas(pizzas, qtdPizzas);
-    printf("Digite o ID da pizza que deseja vender: ");
+    printf("Digite o ID da pizza: ");
     scanf("%d", &idPizza);
-    for (int i = 0; i < qtdPizzas; i++) {
+
+    for (i = 0; i < qtdPizzas; i++) {
         if (pizzas[i].id == idPizza) {
-            precoFinal = pizzas[i].preco;
-            listarIngredientes(ingredientes, qtdIngredientes);
-            printf("Deseja adicionar ingredientes extras? (1 - Sim, 0 - Nao): ");
-            scanf("%d", &adicionar);
-            while (adicionar) {
-                printf("Digite o ID do ingrediente para adicionar: ");
-                scanf("%d", &idIngrediente);
-                for (int j = 0; j < qtdIngredientes; j++) {
-                    if (ingredientes[j].id == idIngrediente) {
-                        precoFinal += ingredientes[j].preco;
-                        break;
-                    }
-                }
-                printf("Deseja adicionar mais ingredientes? (1 - Sim, 0 - Nao): ");
-                scanf("%d", &adicionar);
-            }
-            printf("Venda realizada! Preco final: %.2f\n", precoFinal);
-            return;
+            pizzaEscolhida = pizzas[i];
+            precoFinal = pizzaEscolhida.preco;
+            break;
         }
     }
-    printf("Pizza nao encontrada!\n");
+
+    if (i == qtdPizzas) {
+        printf("Pizza nao encontrada!\n");
+        return;
+    }
+
+    printf("Você escolheu a pizza: %s\n", pizzaEscolhida.nome);
+
+    printf("Ingredientes padrao da pizza:\n");
+    for (i = 0; i < pizzaEscolhida.nIngredientes; i++) {
+        printf("%s\n", pizzaEscolhida.ingredientes[i].nome);
+    }
+
+    printf("Deseja adicionar ingredientes extras? (1 - Sim, 0 - Nao): ");
+    scanf("%d", &adicionarIngredientes);
+
+    while (adicionarIngredientes) {
+        printf("Escolha um ingrediente adicional:\n");
+        listarIngredientes(ingredientes, qtdIngredientes);
+        printf("Digite o ID do ingrediente: ");
+        scanf("%d", &idIngrediente);
+
+        for (j = 0; j < qtdIngredientes; j++) {
+            if (ingredientes[j].id == idIngrediente) {
+                precoFinal += ingredientes[j].preco;
+                printf("Ingrediente adicionado: %s\n", ingredientes[j].nome);
+                break;
+            }
+        }
+
+        if (j == qtdIngredientes) {
+            printf("Ingrediente nao encontrado!\n");
+        }
+
+        printf("Deseja adicionar outro ingrediente? (1 - Sim, 0 - Nao): ");
+        scanf("%d", &adicionarIngredientes);
+    }
+
+    printf("Preco final da pizza: %.2f\n", precoFinal);
 }
