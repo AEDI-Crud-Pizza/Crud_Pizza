@@ -49,7 +49,7 @@ int main() {
             case 9:
                 printf("Saindo...\n");
                 break;
-            default:
+            default: //Eu não conhecia esse comando, mas ele é uma alternativa muito boa ao usar else if
                 printf("Opcao invalida!\n");
         }
     }

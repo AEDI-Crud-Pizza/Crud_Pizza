@@ -46,7 +46,6 @@ void removerIngrediente(Ingrediente* ingredientes, int* numIngredientes) {
                 ingredientes[j] = ingredientes[j + 1];
             }
             (*numIngredientes)--;
-            printf("Ingrediente removido com sucesso!\n");
             return;
         }
     }
