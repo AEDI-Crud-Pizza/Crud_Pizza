@@ -3,146 +3,93 @@
 #include <string.h>
 #include "ingrediente.h"
 
-void listarIngredientes() {
+#define MAX_INGREDIENTES 100
+
+Ingrediente ingredientes[MAX_INGREDIENTES];
+int total_ingredientes = 0;
+
+void carregarIngredientes() {
     FILE *arquivo = fopen("ingrediente.txt", "r");
-    if (!arquivo) {
-        printf("Erro ao abrir o arquivo.\n");
+    if (arquivo == NULL) {
         return;
     }
-
-    char linha[200];
-    printf("\n--- Ingredientes ---\n");
-
-    while (fgets(linha, sizeof(linha), arquivo)) {
-        if (linha[0] == '\n') continue;
-
-        linha[strcspn(linha, "\n")] = 0;
-
-        char *token = strtok(linha, ";");
-
-        if (token) {
-            Ingrediente ingrediente;
-            ingrediente.id = atoi(token);
-
-            token = strtok(NULL, ";");
-            if (token) {
-                strncpy(ingrediente.nome, token, sizeof(ingrediente.nome) - 1);
-                ingrediente.nome[sizeof(ingrediente.nome) - 1] = '\0';
-
-                token = strtok(NULL, ";");
-                if (token) {
-                    ingrediente.preco = atof(token);
-
-                    printf("ID: %d, Nome: %s, Preco: %.2f\n", ingrediente.id, ingrediente.nome, ingrediente.preco);
-                }
-            }
-        }
+    total_ingredientes = 0;
+    while (fscanf(arquivo, "%d;%[^;];%f\n", &ingredientes[total_ingredientes].id, ingredientes[total_ingredientes].nome, &ingredientes[total_ingredientes].preco) == 3) {
+        total_ingredientes++;
     }
-
     fclose(arquivo);
+}
+
+void salvarIngredientes() {
+    FILE *arquivo = fopen("ingrediente.txt", "w");
+    if (arquivo == NULL) {
+        return;
+    }
+    for (int i = 0; i < total_ingredientes; i++) {
+        fprintf(arquivo, "%d;%s;%.2f\n", ingredientes[i].id, ingredientes[i].nome, ingredientes[i].preco);
+    }
+    fclose(arquivo);
+}
+
+void listarIngredientes() {
+    if (total_ingredientes == 0) {
+        printf("Nenhum ingrediente cadastrado\n");
+        return;
+    }
+    for (int i = 0; i < total_ingredientes; i++) {
+        printf("ID: %d Nome: %s Preco: %.2f\n", ingredientes[i].id, ingredientes[i].nome, ingredientes[i].preco);
+    }
 }
 
 void adicionarIngrediente() {
-    FILE *arquivo = fopen("ingrediente.txt", "a");
-    if (!arquivo) {
-        printf("Erro ao abrir o arquivo.\n");
+    if (total_ingredientes >= MAX_INGREDIENTES) {
+        printf("Limite de ingredientes atingido\n");
         return;
     }
-
-    Ingrediente ingrediente;
-    printf("ID do ingrediente: ");
-    scanf("%d", &ingrediente.id);
-    printf("Nome do ingrediente: ");
-    scanf(" %[^\n]", ingrediente.nome);
-    printf("Preco do ingrediente: ");
-    scanf("%f", &ingrediente.preco);
-
-    if (fprintf(arquivo, "%d;%s;%.2f\n", ingrediente.id, ingrediente.nome, ingrediente.preco) < 0) {
-        printf("Erro ao adicionar o ingrediente no arquivo.\n");
-    }
-
-    fclose(arquivo);
-    printf("Ingrediente adicionado com sucesso.\n");
+    Ingrediente novo;
+    novo.id = total_ingredientes + 1;
+    printf("Digite o nome do ingrediente: ");
+    scanf(" %[^\n]", novo.nome);
+    printf("Digite o preco do ingrediente: ");
+    scanf("%f", &novo.preco);
+    ingredientes[total_ingredientes] = novo;
+    total_ingredientes++;
+    salvarIngredientes();
+    printf("Ingrediente adicionado com sucesso\n");
 }
 
 void editarIngrediente() {
-    FILE *arquivo = fopen("ingrediente.txt", "r+");
-    if (!arquivo) {
-        printf("Erro ao abrir o arquivo para leitura.\n");
-        return;
-    }
-
-    int id, encontrado = 0;
-    printf("Digite o ID do ingrediente a ser editado: ");
+    int id;
+    printf("Digite o ID do ingrediente que deseja editar: ");
     scanf("%d", &id);
-
-    char linha[200];
-    while (fgets(linha, sizeof(linha), arquivo)) {
-        Ingrediente ingrediente;
-        if (sscanf(linha, "%d;%49[^\n];%f", &ingrediente.id, ingrediente.nome, &ingrediente.preco) == 3) {
-            if (ingrediente.id == id) {
-                encontrado = 1;
-                printf("Ingrediente encontrado!\n");
-                printf("Novo nome do ingrediente: ");
-                scanf(" %[^\n]", ingrediente.nome);
-                printf("Novo preco do ingrediente: ");
-                scanf("%f", &ingrediente.preco);
-
-                fseek(arquivo, -strlen(linha), SEEK_CUR); // Volta para a posição anterior no arquivo
-                fprintf(arquivo, "%d;%s;%.2f\n", ingrediente.id, ingrediente.nome, ingrediente.preco);
-                break;
-            }
+    for (int i = 0; i < total_ingredientes; i++) {
+        if (ingredientes[i].id == id) {
+            printf("Digite o novo nome do ingrediente: ");
+            scanf(" %[^\n]", ingredientes[i].nome);
+            printf("Digite o novo preco do ingrediente: ");
+            scanf("%f", &ingredientes[i].preco);
+            salvarIngredientes();
+            printf("Ingrediente editado com sucesso\n");
+            return;
         }
     }
-
-    if (!encontrado) {
-        printf("Ingrediente nao encontrado.\n");
-    } else {
-        printf("Ingrediente editado com sucesso.\n");
-    }
-
-    fclose(arquivo);
+    printf("Ingrediente nao encontrado\n");
 }
 
 void removerIngrediente() {
-    FILE *arquivo = fopen("ingrediente.txt", "r+");
-    if (!arquivo) {
-        printf("Erro ao abrir o arquivo.\n");
-        return;
-    }
-
-    FILE *temp = fopen("temp.txt", "w");
-    if (!temp) {
-        printf("Erro ao criar arquivo temporario.\n");
-        fclose(arquivo);
-        return;
-    }
-
-    char linha[200];
-    int id, encontrado = 0;
-    printf("Digite o ID do ingrediente a ser removido: ");
+    int id;
+    printf("Digite o ID do ingrediente que deseja remover: ");
     scanf("%d", &id);
-
-    while (fgets(linha, sizeof(linha), arquivo)) {
-        Ingrediente ingrediente;
-        if (sscanf(linha, "%d;%49[^\n];%f", &ingrediente.id, ingrediente.nome, &ingrediente.preco) == 3) {
-            if (ingrediente.id != id) {
-                fprintf(temp, "%d;%s;%.2f\n", ingrediente.id, ingrediente.nome, ingrediente.preco);
-            } else {
-                encontrado = 1;
+    for (int i = 0; i < total_ingredientes; i++) {
+        if (ingredientes[i].id == id) {
+            for (int j = i; j < total_ingredientes - 1; j++) {
+                ingredientes[j] = ingredientes[j + 1];
             }
+            total_ingredientes--;
+            salvarIngredientes();
+            printf("Ingrediente removido com sucesso\n");
+            return;
         }
     }
-
-    if (!encontrado) {
-        printf("Ingrediente nao encontrado.\n");
-    } else {
-        printf("Ingrediente removido com sucesso.\n");
-    }
-
-    fclose(arquivo);
-    fclose(temp);
-
-    remove("ingrediente.txt");
-    rename("temp.txt", "ingrediente.txt");
+    printf("Ingrediente nao encontrado\n");
 }

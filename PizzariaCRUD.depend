@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1733393646 source:c:\users\1563147\documents\pizzariacrud\pizzariacrud\main.c
+1733398274 source:c:\users\1563147\documents\pizzariacrud\pizzariacrud\main.c
 	<stdio.h>
 	"pizza.h"
 	"ingrediente.h"
 
 1733393901 c:\users\1563147\documents\pizzariacrud\pizzariacrud\pizza.h
 
-1733396726 c:\users\1563147\documents\pizzariacrud\pizzariacrud\ingrediente.h
+1733397678 c:\users\1563147\documents\pizzariacrud\pizzariacrud\ingrediente.h
 
-1733396718 source:c:\users\1563147\documents\pizzariacrud\pizzariacrud\ingrediente.c
+1733398136 source:c:\users\1563147\documents\pizzariacrud\pizzariacrud\ingrediente.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

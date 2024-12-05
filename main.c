@@ -12,7 +12,7 @@ void menuPizzas() {
         printf("4. Remover Pizza\n");
         printf("5. Vender Pizza\n");
         printf("6. Voltar\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -34,7 +34,7 @@ void menuIngredientes() {
         printf("3. Editar Ingrediente\n");
         printf("4. Remover Ingrediente\n");
         printf("5. Voltar\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -53,7 +53,7 @@ int main() {
         printf("1. Gerenciar Pizzas\n");
         printf("2. Gerenciar Ingredientes\n");
         printf("3. Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -62,6 +62,6 @@ int main() {
         }
     } while (opcao != 3);
 
-    printf("Encerrando o programa...\n");
+    printf("Terminado\n");
     return 0;
 }
