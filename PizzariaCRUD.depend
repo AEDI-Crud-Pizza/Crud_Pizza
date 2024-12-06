@@ -18,5 +18,27 @@
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"pizza.h
+
+1733454434 source:c:\users\gustavo lopes\desktop\crud\pizzariacrud\main.c
+	<stdio.h>
 	"pizza.h"
+	"ingrediente.h"
+
+1733453109 c:\users\gustavo lopes\desktop\crud\pizzariacrud\pizza.h
+
+1733454718 c:\users\gustavo lopes\desktop\crud\pizzariacrud\ingrediente.h
+
+1733456901 source:c:\users\gustavo lopes\desktop\crud\pizzariacrud\pizza.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pizza.h"
+	"ingrediente.h"
+
+1733454999 source:c:\users\gustavo lopes\desktop\crud\pizzariacrud\ingrediente.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ingrediente.h"
 

@@ -28,7 +28,7 @@ void menuPizzas() {
 void menuIngredientes() {
     int opcao;
     do {
-        printf("\n--- Menu Ingredientes ---\n");
+        printf("\nMenu Ingredientes\n");
         printf("1. Listar Ingredientes\n");
         printf("2. Adicionar Ingrediente\n");
         printf("3. Editar Ingrediente\n");
@@ -38,10 +38,14 @@ void menuIngredientes() {
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1: listarIngredientes(); break;
-            case 2: adicionarIngrediente(); break;
-            case 3: editarIngrediente(); break;
-            case 4: removerIngrediente(); break;
+            case 1: listarIngredientes();
+            break;
+            case 2: adicionarIngrediente();
+            break;
+            case 3: editarIngrediente();
+            break;
+            case 4: removerIngrediente();
+            break;
         }
     } while (opcao != 5);
 }
@@ -49,6 +53,8 @@ void menuIngredientes() {
 int main() {
     int opcao;
     do {
+        carregarIngredientes();
+        carregarPizzas();
         printf("\n--- Sistema da Pizzaria ---\n");
         printf("1. Gerenciar Pizzas\n");
         printf("2. Gerenciar Ingredientes\n");
